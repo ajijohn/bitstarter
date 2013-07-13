@@ -125,11 +125,19 @@ if(require.main == module) {
         .option('-u, --url <check_url>', 'Path to heroku url', clone(assertURLValid), CHECKSURL_DEFAULT)
       .parse(process.argv);
     
-    checkWebHtmlFile(program.url,program.checks); 
+    if(program.url)
+    
+      checkWebHtmlFile(program.url,program.checks); 
+    
+      else
+     {
+    	var checkJson = checkHtmlFile(program.file, program.checks);
+        var outJson = JSON.stringify(checkJsonWeb, null, 4);
+        console.log(outJson);
+    	
+     };	
     //var checkJsonWeb = checkWebHtmlFile(program.url,program.checks); 
-    //var checkJson = checkHtmlFile(program.file, program.checks);
-    //var outJson = JSON.stringify(checkJsonWeb, null, 4);
-    //console.log(outJson);
+    
 } else {
     exports.checkHtmlFile = checkHtmlFile;
 };
